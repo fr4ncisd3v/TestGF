@@ -1,0 +1,16 @@
+name: Sync Drive File
+on:
+  repository_dispatch:
+    types: [drive_update]
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          wget "https://drive.google.com/uc?export=download&id=1yeOXfHqJcbzMAoaREs1WMBIRrOGS8CbHE_CJ80KstdM" -O arquivo.txt
+          git config --global user.name "test"
+          git config --global user.email "email@example.com"
+          git add arquivo.csv
+          git commit -m "Atualiza arquivo do Drive"
+          git push
